@@ -1,0 +1,1152 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rumah Makan Lezat</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: linear-gradient(135deg, #f8fafc 0%, #fff7ed 45%, #fff1f2 100%); }
+    #app { min-height: 100%; }
+    .slide-enter { animation: slideIn 0.3s ease-out; }
+    .fade-enter { animation: fadeIn 0.3s ease-out; }
+    .cart-badge { animation: pulse 0.45s ease-out; }
+    .glass { backdrop-filter: blur(12px); }
+    .pattern-bg {
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.14) 0, rgba(255,255,255,0.14) 2px, transparent 2px),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 2px, transparent 2px);
+      background-size: 26px 26px, 34px 34px;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1.18); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="flex flex-col">
+    <header class="sticky top-0 z-40 bg-gradient-to-r from-orange-500 via-orange-500 to-red-500 text-white shadow-lg">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-white/20 grid place-items-center glass">
+            <i data-lucide="utensils-crossed" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div>
+            <h1 id="restaurant-name" class="text-xl md:text-2xl font-bold">Rumah Makan Lezat</h1>
+            <p class="text-xs md:text-sm text-orange-50/90">Pesan cepat, mudah, dan ramah mobile</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 md:gap-3">
+          <button id="history-btn" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-3 py-2 rounded-xl transition">
+            <i data-lucide="history" style="width: 20px; height: 20px;"></i>
+            <span class="hidden md:inline">Riwayat</span>
+          </button>
+          <button id="cart-btn" class="relative flex items-center gap-2 bg-white/20 hover:bg-white/30 px-3 py-2 rounded-xl transition">
+            <i data-lucide="shopping-cart" style="width: 20px; height: 20px;"></i>
+            <span id="cart-count" class="bg-yellow-300 text-orange-700 rounded-full min-w-6 h-6 px-1 flex items-center justify-center text-sm font-bold">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <section id="homepage">
+        <section class="relative overflow-hidden bg-gradient-to-r from-orange-500 via-orange-500 to-red-500 text-white">
+          <div class="absolute inset-0 pattern-bg opacity-60"></div>
+          <div class="relative max-w-6xl mx-auto px-4 py-12 md:py-20 grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <span class="inline-flex items-center rounded-full bg-white/15 px-4 py-2 text-sm font-semibold mb-5">Delivery cepat dan menu favorit harian</span>
+              <h2 class="text-4xl md:text-5xl font-black leading-tight mb-4">Pesan makanan terbaik tanpa langkah yang ribet.</h2>
+              <p class="text-base md:text-lg text-orange-50/90 mb-6">Cari menu, pilih variasi, tambah ke keranjang, lalu checkout dengan alur yang singkat dan nyaman di mobile.</p>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button id="order-now-btn" class="w-fit bg-yellow-300 text-orange-700 font-bold py-3 px-8 rounded-xl hover:bg-yellow-200 transition shadow-lg">Pesan Sekarang</button>
+                <a href="#info-section" class="w-fit border border-white/40 bg-white/10 hover:bg-white/20 py-3 px-8 rounded-xl font-semibold transition">Lihat Info Toko</a>
+              </div>
+            </div>
+            <div class="grid gap-4">
+              <div class="rounded-3xl bg-white text-slate-800 p-5 shadow-2xl">
+                <div class="h-52 rounded-2xl bg-gradient-to-br from-orange-200 via-orange-100 to-red-200 flex items-center justify-center mb-4">
+                  <i data-lucide="chef-hat" style="width: 82px; height: 82px; color: #ea580c;"></i>
+                </div>
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="inline-flex rounded-full bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 mb-2">Best Seller</p>
+                    <h3 class="text-xl font-bold">Nasi Goreng Spesial</h3>
+                    <p class="text-sm text-slate-500 mt-1">Pilih level pedas, atur topping, langsung masuk keranjang.</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-sm text-slate-500">Mulai dari</p>
+                    <p class="text-xl font-extrabold text-orange-600">Rp45.000</p>
+                  </div>
+                </div>
+              </div>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div class="rounded-3xl bg-white/15 border border-white/20 p-4 glass">
+                  <div class="w-12 h-12 rounded-2xl bg-white/20 grid place-items-center mb-3">
+                    <i data-lucide="search" style="width: 24px; height: 24px;"></i>
+                  </div>
+                  <p class="font-bold">Pencarian cepat</p>
+                  <p class="text-sm text-orange-50/85 mt-1">Temukan menu favorit dalam hitungan detik.</p>
+                </div>
+                <div class="rounded-3xl bg-white/15 border border-white/20 p-4 glass">
+                  <div class="w-12 h-12 rounded-2xl bg-white/20 grid place-items-center mb-3">
+                    <i data-lucide="truck" style="width: 24px; height: 24px;"></i>
+                  </div>
+                  <p class="font-bold">Checkout ringkas</p>
+                  <p class="text-sm text-orange-50/85 mt-1">COD, transfer, dan e-wallet tersedia.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-4 py-6 md:py-8">
+          <div class="flex flex-col md:flex-row gap-4 mb-6">
+            <div class="flex-1 relative">
+              <i data-lucide="search" style="width: 20px; height: 20px;" class="absolute left-3 top-3.5 text-slate-400"></i>
+              <input id="search-input" type="text" placeholder="Cari menu favorit..." class="w-full pl-10 pr-4 py-3 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-orange-500 bg-white">
+            </div>
+            <div class="flex gap-2 overflow-x-auto pb-1">
+              <button class="category-btn px-4 py-2 bg-orange-500 text-white rounded-xl font-semibold whitespace-nowrap" data-category="all">Semua</button>
+              <button class="category-btn px-4 py-2 bg-white text-slate-700 rounded-xl font-semibold whitespace-nowrap border border-slate-200 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition" data-category="makanan">Makanan Utama</button>
+              <button class="category-btn px-4 py-2 bg-white text-slate-700 rounded-xl font-semibold whitespace-nowrap border border-slate-200 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition" data-category="minuman">Minuman</button>
+              <button class="category-btn px-4 py-2 bg-white text-slate-700 rounded-xl font-semibold whitespace-nowrap border border-slate-200 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition" data-category="dessert">Dessert</button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <h3 class="text-2xl font-bold text-slate-900">Menu Pilihan</h3>
+              <p class="text-slate-500 text-sm">Klik kartu menu untuk melihat detail, variasi, dan jumlah pesanan.</p>
+            </div>
+            <span id="menu-count" class="hidden md:inline text-sm font-semibold text-orange-600 bg-orange-50 px-3 py-2 rounded-full">0 menu</span>
+          </div>
+
+          <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="info-section" class="bg-white/70 border-y border-slate-200">
+          <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+                <div class="w-12 h-12 rounded-2xl bg-orange-100 grid place-items-center mb-3">
+                  <i data-lucide="map-pin" style="width: 24px; height: 24px; color: #ea580c;"></i>
+                </div>
+                <h3 class="font-bold mb-1">Lokasi</h3>
+                <p id="address-info" class="text-slate-600 text-sm">Jalan Makan Enak No. 123</p>
+              </div>
+              <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+                <div class="w-12 h-12 rounded-2xl bg-orange-100 grid place-items-center mb-3">
+                  <i data-lucide="phone" style="width: 24px; height: 24px; color: #ea580c;"></i>
+                </div>
+                <h3 class="font-bold mb-1">Hubungi Kami</h3>
+                <p id="phone-info" class="text-slate-600 text-sm">+62 812 3456 7890</p>
+              </div>
+              <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+                <div class="w-12 h-12 rounded-2xl bg-orange-100 grid place-items-center mb-3">
+                  <i data-lucide="bike" style="width: 24px; height: 24px; color: #ea580c;"></i>
+                </div>
+                <h3 class="font-bold mb-1">Layanan Antar</h3>
+                <p class="text-slate-600 text-sm">Gratis ongkir untuk pembelian di atas Rp100.000 dan area sekitar toko.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <div id="product-modal" class="hidden fixed inset-0 bg-slate-950/50 z-50 flex items-end md:items-center justify-center p-4">
+        <div class="bg-white rounded-t-3xl md:rounded-3xl w-full md:max-w-2xl max-h-[95vh] overflow-y-auto shadow-2xl slide-enter">
+          <div class="sticky top-0 flex items-center justify-between p-4 bg-gradient-to-r from-orange-500 to-red-500 text-white">
+            <h2 id="product-title" class="text-xl font-bold">Detail Produk</h2>
+            <button id="close-modal" class="hover:bg-white/20 p-2 rounded-xl transition">
+              <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+            </button>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <div id="product-image" class="w-full h-44 md:h-60 bg-gradient-to-br from-orange-200 to-red-200 rounded-2xl mb-4 flex items-center justify-center text-orange-600"></div>
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <div>
+                  <p id="product-badge" class="hidden text-xs font-bold bg-yellow-300 text-orange-700 px-3 py-1 rounded-full w-fit mb-2"></p>
+                  <p id="product-desc" class="text-slate-600">Deskripsi produk</p>
+                </div>
+                <p id="product-price" class="text-2xl font-black text-orange-500 whitespace-nowrap">Rp 0</p>
+              </div>
+            </div>
+            <div id="variant-section" class="mb-6"></div>
+            <div class="mb-6">
+              <label class="block text-sm font-semibold mb-3">Jumlah Pesanan</label>
+              <div class="flex items-center gap-3 bg-slate-100 w-fit rounded-xl p-2">
+                <button id="qty-minus" class="bg-white hover:bg-slate-50 p-2 rounded-lg transition">
+                  <i data-lucide="minus" style="width: 20px; height: 20px;"></i>
+                </button>
+                <span id="qty-display" class="font-bold w-8 text-center">1</span>
+                <button id="qty-plus" class="bg-white hover:bg-slate-50 p-2 rounded-lg transition">
+                  <i data-lucide="plus" style="width: 20px; height: 20px;"></i>
+                </button>
+              </div>
+            </div>
+            <div class="mb-6">
+              <label class="block text-sm font-semibold mb-2">Catatan Pesanan (opsional)</label>
+              <textarea id="product-notes" rows="2" class="w-full border-2 border-slate-200 rounded-xl p-3 focus:outline-none focus:border-orange-500" placeholder="Misal: tanpa bawang, sambal dipisah"></textarea>
+            </div>
+            <button id="add-to-cart-btn" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 rounded-xl hover:shadow-lg transition">Tambah ke Keranjang</button>
+          </div>
+        </div>
+      </div>
+
+      <section id="cart-view" class="hidden max-w-6xl mx-auto px-4 py-8">
+        <button id="back-from-cart" class="flex items-center gap-2 text-orange-600 hover:text-orange-700 font-semibold transition mb-6">
+          <i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Kembali
+        </button>
+        <h2 class="text-3xl font-bold mb-6">Keranjang Pesanan</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2">
+            <div id="cart-items-container" class="space-y-4"></div>
+            <div id="empty-cart" class="text-center py-12 bg-white rounded-3xl border border-slate-200">
+              <i data-lucide="shopping-cart" style="width: 48px; height: 48px;" class="mx-auto text-slate-300 mb-4"></i>
+              <p class="text-slate-500 text-lg">Keranjang Anda kosong</p>
+            </div>
+          </div>
+          <div class="lg:col-span-1">
+            <div class="bg-white rounded-3xl p-6 sticky top-24 shadow-sm border border-slate-200">
+              <h3 class="font-bold text-lg mb-4">Ringkasan Pesanan</h3>
+              <div class="space-y-3 mb-6 pb-6 border-b border-slate-200">
+                <div class="flex justify-between text-slate-600">
+                  <span>Subtotal</span>
+                  <span id="subtotal" class="font-semibold">Rp 0</span>
+                </div>
+                <div class="flex justify-between text-slate-600">
+                  <span>Estimasi Ongkir</span>
+                  <span id="delivery-fee-display" class="font-semibold">Rp 0</span>
+                </div>
+              </div>
+              <div class="flex justify-between text-lg font-bold mb-6 text-orange-600">
+                <span>Total</span>
+                <span id="total-price">Rp 0</span>
+              </div>
+              <button id="checkout-btn" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 rounded-xl hover:shadow-lg transition">Lanjut ke Checkout</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="checkout-view" class="hidden max-w-2xl mx-auto px-4 py-8">
+        <button id="back-to-cart-btn" class="flex items-center gap-2 text-orange-600 hover:text-orange-700 font-semibold transition mb-6">
+          <i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Kembali
+        </button>
+        <h2 class="text-3xl font-bold mb-6">Konfirmasi Pesanan</h2>
+        <form id="checkout-form" class="space-y-6">
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200">
+            <h3 class="font-bold text-lg mb-4">Tipe Pesanan</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="relative cursor-pointer">
+                <input type="radio" name="order-type" value="dine-in" checked class="sr-only peer">
+                <div class="peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 bg-white border-2 border-slate-200 rounded-xl p-4 text-center transition">
+                  <i data-lucide="utensils" style="width: 28px; height: 28px;" class="mx-auto mb-2"></i>
+                  <p class="font-bold">Dine-in</p>
+                  <p class="text-xs mt-1">Makan di tempat</p>
+                </div>
+              </label>
+              <label class="relative cursor-pointer">
+                <input type="radio" name="order-type" value="delivery" class="sr-only peer">
+                <div class="peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 bg-white border-2 border-slate-200 rounded-xl p-4 text-center transition">
+                  <i data-lucide="truck" style="width: 28px; height: 28px;" class="mx-auto mb-2"></i>
+                  <p class="font-bold">Antar</p>
+                  <p class="text-xs mt-1">Pesan ke rumah</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl p-6 border-2 border-orange-200">
+            <h3 class="font-bold text-lg mb-4">Metode Pembayaran</h3>
+            <div class="space-y-3">
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input type="radio" name="payment-method" value="cash" checked class="w-4 h-4 mt-1 text-orange-600">
+                <div><p class="font-semibold text-slate-800">Tunai / COD</p><p class="text-sm text-slate-600">Bayar saat pesanan diterima.</p></div>
+              </label>
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input type="radio" name="payment-method" value="transfer" class="w-4 h-4 mt-1 text-orange-600">
+                <div><p class="font-semibold text-slate-800">Transfer Bank</p><p class="text-sm text-slate-600">BCA, Mandiri, atau BNI.</p></div>
+              </label>
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input type="radio" name="payment-method" value="ewallet" class="w-4 h-4 mt-1 text-orange-600">
+                <div><p class="font-semibold text-slate-800">E-Wallet / QRIS</p><p class="text-sm text-slate-600">Pembayaran instan dari dompet digital.</p></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 border border-slate-200">
+            <h3 class="font-bold text-lg mb-4">Informasi Pelanggan</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-semibold mb-2">Nama Pelanggan</label>
+                <input id="customer-name" type="text" class="w-full border-2 border-slate-200 rounded-xl p-3 focus:outline-none focus:border-orange-500" placeholder="Nama Anda">
+              </div>
+              <div id="dine-in-field">
+                <label class="block text-sm font-semibold mb-2">Nomor Meja</label>
+                <input id="customer-table" type="text" class="w-full border-2 border-slate-200 rounded-xl p-3 focus:outline-none focus:border-orange-500" placeholder="Misal: 5, A1, VIP-2">
+              </div>
+              <div id="delivery-field" class="hidden">
+                <label class="block text-sm font-semibold mb-2">Alamat Pengiriman</label>
+                <input id="customer-address" type="text" class="w-full border-2 border-slate-200 rounded-xl p-3 focus:outline-none focus:border-orange-500" placeholder="Jalan, No. Rumah, RT/RW">
+              </div>
+              <div id="phone-field" class="hidden">
+                <label class="block text-sm font-semibold mb-2">Nomor HP</label>
+                <input id="customer-phone-delivery" type="text" class="w-full border-2 border-slate-200 rounded-xl p-3 focus:outline-none focus:border-orange-500" placeholder="Nomor untuk konfirmasi pengiriman">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-2">Catatan Pesanan (opsional)</label>
+                <textarea id="special-notes" rows="2" class="w-full border-2 border-slate-200 rounded-xl p-3 focus:outline-none focus:border-orange-500" placeholder="Misal: tanpa bawang, tambah sambal"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 border border-slate-200">
+            <h3 class="font-bold text-lg mb-4">Ringkasan Pesanan</h3>
+            <div id="checkout-summary" class="space-y-2 mb-4 pb-4 border-b border-slate-200 text-sm"></div>
+            <div class="space-y-2">
+              <div class="flex justify-between text-slate-600"><span>Subtotal</span><span id="checkout-subtotal">Rp 0</span></div>
+              <div class="flex justify-between text-slate-600"><span>Ongkir</span><span id="checkout-delivery">Rp 0</span></div>
+              <div class="flex justify-between text-lg font-bold text-orange-600 pt-2 border-t border-slate-200"><span>Total</span><span id="checkout-total">Rp 0</span></div>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <button type="button" id="back-checkout" class="flex-1 bg-slate-200 text-slate-700 font-bold py-3 rounded-xl hover:bg-slate-300 transition">Kembali</button>
+            <button type="submit" id="place-order-btn" class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 rounded-xl hover:shadow-lg transition">Pesan Sekarang</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="confirmation-view" class="hidden max-w-2xl mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+          <div class="inline-block bg-green-100 p-4 rounded-full mb-4"><i data-lucide="check-circle" style="width: 48px; height: 48px; color: #16a34a;"></i></div>
+          <h2 class="text-3xl font-bold mb-2">Pesanan Berhasil</h2>
+          <p id="confirmation-subtitle" class="text-slate-600">Pesanan Anda sudah masuk ke dapur</p>
+        </div>
+        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 mb-8 border-2 border-green-200">
+          <div class="text-center mb-6">
+            <p class="text-slate-600 text-sm mb-1">Nomor Pesanan</p>
+            <p id="order-number" class="text-3xl font-bold text-green-600">ORD-000000</p>
+          </div>
+          <div class="space-y-4 mb-6 pb-6 border-b border-green-200">
+            <div><p class="text-sm text-slate-600">Atas Nama</p><p id="confirm-name" class="font-semibold">Nama Pelanggan</p></div>
+            <div id="confirm-location-section"><p class="text-sm text-slate-600">Nomor Meja</p><p id="confirm-address" class="font-semibold">Meja 5</p></div>
+            <div><p class="text-sm text-slate-600">Estimasi</p><p id="confirm-estimation" class="font-semibold text-orange-600">15-20 menit</p></div>
+            <div><p class="text-sm text-slate-600">Status Pesanan</p><p id="confirm-status" class="font-semibold">Sedang diproses</p></div>
+          </div>
+          <div class="text-center">
+            <p class="text-slate-600 mb-2">Total Pesanan</p>
+            <p id="confirm-total" class="text-4xl font-bold text-orange-600">Rp 0</p>
+          </div>
+        </div>
+        <div id="confirmation-payment-info" class="bg-indigo-50 rounded-xl p-4 mb-4 border-l-4 border-indigo-500 text-sm text-indigo-900"></div>
+        <div id="confirmation-note" class="bg-blue-50 rounded-xl p-4 mb-8 border-l-4 border-blue-500">
+          <p id="confirmation-note-text" class="text-blue-800 text-sm"><strong>Catatan:</strong> Pesanan Anda sedang disiapkan.</p>
+        </div>
+        <button id="order-again-btn" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 rounded-xl hover:shadow-lg transition">Pesan Lagi</button>
+      </section>
+
+      <section id="history-view" class="hidden max-w-6xl mx-auto px-4 py-8">
+        <button id="back-from-history" class="flex items-center gap-2 text-orange-600 hover:text-orange-700 font-semibold transition mb-6">
+          <i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i> Kembali
+        </button>
+        <h2 class="text-3xl font-bold mb-6">Riwayat Pesanan</h2>
+        <div id="history-container" class="space-y-4"></div>
+        <div id="empty-history" class="text-center py-12 bg-white rounded-3xl border border-slate-200">
+          <i data-lucide="inbox" style="width: 48px; height: 48px;" class="mx-auto text-slate-300 mb-4"></i>
+          <p class="text-slate-500 text-lg">Belum ada riwayat pesanan</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    const defaultMenuData = [
+      { id: 1, name: "Nasi Goreng Spesial", category: "makanan", price: 45000, desc: "Nasi goreng dengan telur, udang, dan sayuran segar.", badge: "Best Seller", icon: "image", variants: [{ name: "Level Pedas", options: [{ label: "Tidak Pedas", price: 0 }, { label: "Pedas", price: 3000 }, { label: "Super Pedas", price: 5000 }] }] },
+      { id: 2, name: "Rendang Daging", category: "makanan", price: 55000, desc: "Rendang daging sapi lembut dengan rempah pilihan.", badge: "Promo", icon: "image", variants: [{ name: "Porsi", options: [{ label: "1/2 Porsi", price: -10000 }, { label: "1 Porsi", price: 0 }, { label: "2 Porsi", price: 45000 }] }] },
+      { id: 3, name: "Soto Ayam", category: "makanan", price: 35000, desc: "Soto ayam tradisional dengan kuah gurih dan topping segar.", badge: "", icon: "image", variants: [{ name: "Topping", options: [{ label: "Standar", price: 0 }, { label: "Dengan Telur", price: 5000 }, { label: "Dengan Tahu", price: 4000 }] }] },
+      { id: 4, name: "Bakso Spesial", category: "makanan", price: 42000, desc: "Bakso daging dengan kuah kaldu pilihan dan mie lembut.", badge: "Best Seller", icon: "image", variants: [{ name: "Jumlah Bola", options: [{ label: "8 Bola", price: 0 }, { label: "12 Bola", price: 9000 }, { label: "15 Bola", price: 14000 }] }] },
+      { id: 5, name: "Iced Tea Lemon", category: "minuman", price: 15000, desc: "Teh dingin segar dengan sentuhan lemon.", badge: "", icon: "glass-water", variants: [{ name: "Ukuran", options: [{ label: "Regular", price: 0 }, { label: "Large", price: 4000 }] }] },
+      { id: 6, name: "Jus Mangga", category: "minuman", price: 18000, desc: "Jus mangga segar tanpa gula berlebih.", badge: "Promo", icon: "cup-soda", variants: [{ name: "Ukuran", options: [{ label: "Regular", price: 0 }, { label: "Large", price: 5000 }] }] },
+      { id: 7, name: "Kopi Arabika", category: "minuman", price: 22000, desc: "Kopi arabika premium dari perkebunan terpilih.", badge: "", icon: "coffee", variants: [{ name: "Suhu", options: [{ label: "Panas", price: 0 }, { label: "Dingin", price: 2000 }] }] },
+      { id: 8, name: "Es Cendol", category: "dessert", price: 12000, desc: "Es cendol klasik dengan santan dan gula merah.", badge: "", icon: "image", variants: [{ name: "Level Manis", options: [{ label: "Kurang Manis", price: 0 }, { label: "Normal", price: 0 }, { label: "Lebih Manis", price: 1000 }] }] },
+      { id: 9, name: "Brownies Kukus", category: "dessert", price: 17000, desc: "Brownies lembut sebagai penutup yang manis.", badge: "Promo", icon: "image", variants: [{ name: "Topping", options: [{ label: "Original", price: 0 }, { label: "Cokelat", price: 3000 }, { label: "Keju", price: 3000 }] }] }
+    ];
+
+    const defaultConfig = {
+      restaurant_name: "Rumah Makan Lezat",
+      restaurant_address: "Jalan Makan Enak No. 123",
+      restaurant_phone: "+62 812 3456 7890",
+      delivery_fee: 10000,
+      free_delivery_minimum: 100000
+    };
+    const storageKeys = {
+      cart: "foodOrderCart",
+      orderHistory: "foodOrderMyHistory",
+      sharedBootstrap: "webOrderSharedBootstrapCache",
+      sharedSyncEvent: "webOrderSyncEvent"
+    };
+
+    let menuData = defaultMenuData.slice();
+    let config = { ...defaultConfig };
+    let cart = readJson(storageKeys.cart, []);
+    let allOrders = readJson(storageKeys.orderHistory, []);
+    let currentProduct = null;
+    let bootstrapPoller = null;
+    let lastMenuSignature = "";
+    let lastConfigSignature = "";
+
+    function formatCurrency(value) {
+      return "Rp " + value.toLocaleString("id-ID");
+    }
+
+    function readJson(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(storageKeys.cart, JSON.stringify(cart));
+      localStorage.setItem(storageKeys.orderHistory, JSON.stringify(allOrders));
+    }
+
+    function setRestaurantInfo() {
+      document.getElementById("restaurant-name").textContent = config.restaurant_name;
+      document.getElementById("address-info").textContent = config.restaurant_address;
+      document.getElementById("phone-info").textContent = config.restaurant_phone;
+    }
+
+    function normalizeMenuData(items) {
+      return (items || []).map((item, index) => ({
+        id: item.id || index + 1,
+        name: item.name || `Menu ${index + 1}`,
+        category: item.category || "makanan",
+        price: Number(item.price || 0),
+        desc: item.desc || "Menu rumah makan yang siap dipesan.",
+        badge: item.badge || "",
+        icon: item.icon || "image",
+        image: item.image || "",
+        stock: Math.max(0, Number(item.stock ?? 10)),
+        variants: Array.isArray(item.variants) && item.variants.length
+          ? item.variants
+          : [{ name: "Pilihan", options: [{ label: "Standar", price: 0 }] }]
+      }));
+    }
+
+    function getMenuSignature(items = []) {
+      return JSON.stringify((items || []).map(item => [
+        Number(item.id || 0),
+        String(item.name || ""),
+        Number(item.price || 0),
+        Number(item.stock || 0),
+        String(item.badge || ""),
+        String(item.image || "")
+      ]));
+    }
+
+    function getConfigSignature(value = {}) {
+      return JSON.stringify([
+        value.restaurant_name || "",
+        value.restaurant_address || "",
+        value.restaurant_phone || "",
+        Number(value.delivery_fee || 0),
+        Number(value.free_delivery_minimum || 0)
+      ]);
+    }
+
+    function saveMenuCatalog() {
+      return Promise.resolve();
+    }
+
+    async function apiFetch(url, options = {}) {
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+          ...(options.headers || {})
+        },
+        ...options
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || "Request gagal");
+      }
+      return data;
+    }
+
+    async function loadBootstrap() {
+      const data = await apiFetch("/api/bootstrap");
+      menuData = normalizeMenuData(data.menu);
+      config = { ...defaultConfig, ...data.config };
+      persistSharedBootstrap();
+    }
+
+    function persistSharedBootstrap() {
+      localStorage.setItem(storageKeys.sharedBootstrap, JSON.stringify({
+        saved_at: Date.now(),
+        config,
+        menu: menuData
+      }));
+    }
+
+    function hydrateFromSharedBootstrap() {
+      try {
+        const cached = JSON.parse(localStorage.getItem(storageKeys.sharedBootstrap) || "null");
+        if (!cached) return false;
+        menuData = normalizeMenuData(cached.menu || defaultMenuData);
+        config = { ...defaultConfig, ...(cached.config || {}) };
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    async function syncCustomerData({ silent = false } = {}) {
+      const previousMenuSignature = lastMenuSignature;
+      const previousConfigSignature = lastConfigSignature;
+      await loadBootstrap();
+      const hasMenuChanges = lastMenuSignature !== previousMenuSignature;
+      const hasConfigChanges = lastConfigSignature !== previousConfigSignature;
+      if (!hasMenuChanges && !hasConfigChanges) return;
+
+      lastMenuSignature = getMenuSignature(menuData);
+      lastConfigSignature = getConfigSignature(config);
+
+      setRestaurantInfo();
+      if (hasMenuChanges) {
+        const activeSearch = document.getElementById("search-input").value;
+        renderMenu(getActiveCategory(), activeSearch);
+        if (currentProduct) {
+          const refreshed = menuData.find(item => item.id === currentProduct.id);
+          if (refreshed) currentProduct = refreshed;
+        }
+      }
+      if (hasConfigChanges && !document.getElementById("cart-view").classList.contains("hidden")) {
+        updateCartSummary();
+      }
+      if (!silent && hasMenuChanges) {
+        showNotification("Menu diperbarui.", "success");
+      }
+    }
+
+    function startCustomerRealtimeSync() {
+      if (bootstrapPoller) clearInterval(bootstrapPoller);
+      bootstrapPoller = setInterval(() => {
+        syncCustomerData({ silent: true }).catch(() => {});
+      }, 3000);
+    }
+
+    async function refreshMyOrderStatuses() {
+      if (!allOrders.length) return;
+      const numbers = allOrders.map(order => order.order_number).filter(Boolean);
+      if (!numbers.length) return;
+      const statuses = await apiFetch(`/api/orders/public-status?numbers=${encodeURIComponent(numbers.join(","))}`);
+      const statusMap = new Map(statuses.map(item => [item.order_number, item]));
+      allOrders = allOrders.map(order => {
+        const latest = statusMap.get(order.order_number);
+        return latest ? { ...order, ...latest } : order;
+      });
+      saveState();
+    }
+
+    function getActiveCategory() {
+      return document.querySelector(".category-btn.bg-orange-500")?.dataset.category || "all";
+    }
+
+    function getDeliveryFee(subtotal, orderType) {
+      if (orderType !== "delivery") return 0;
+      if (subtotal >= config.free_delivery_minimum) return 0;
+      return Number(config.delivery_fee) || 0;
+    }
+
+    function getSelectedVariantInfo(product) {
+      return product.variants.map((variant, index) => {
+        const select = document.getElementById("variant-" + index);
+        const selectedIndex = select.selectedIndex;
+        const selectedOption = variant.options[selectedIndex];
+        return {
+          group: variant.name,
+          label: selectedOption.label,
+          price: selectedOption.price
+        };
+      });
+    }
+
+    function computeProductUnitPrice(product, selectedVariants) {
+      return product.price + selectedVariants.reduce((sum, item) => sum + item.price, 0);
+    }
+
+    function showNotification(message, type = "success") {
+      const toast = document.createElement("div");
+      toast.className = `fixed bottom-4 right-4 ${type === "error" ? "bg-red-500" : "bg-green-500"} text-white px-6 py-3 rounded-xl shadow-lg fade-enter z-[60]`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2600);
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const counter = document.getElementById("cart-count");
+      counter.textContent = count;
+      counter.classList.remove("cart-badge");
+      void counter.offsetWidth;
+      counter.classList.add("cart-badge");
+    }
+
+    function closeProductModal() {
+      document.getElementById("product-modal").classList.add("hidden");
+    }
+
+    function renderMenu(category = "all", searchTerm = "") {
+      let filtered = menuData.slice();
+      if (category !== "all") filtered = filtered.filter(item => item.category === category);
+      if (searchTerm.trim()) filtered = filtered.filter(item => item.name.toLowerCase().includes(searchTerm.trim().toLowerCase()));
+
+      document.getElementById("menu-count").textContent = filtered.length + " menu";
+
+      const grid = document.getElementById("menu-grid");
+      if (!filtered.length) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-white border border-slate-200 rounded-3xl p-10 text-center">
+            <i data-lucide="search-x" style="width: 42px; height: 42px;" class="mx-auto text-slate-300 mb-3"></i>
+            <p class="text-lg font-bold text-slate-700">Menu tidak ditemukan</p>
+            <p class="text-slate-500 text-sm mt-1">Coba kata kunci lain atau ganti kategorinya.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <article class="bg-white rounded-3xl shadow-sm hover:shadow-xl border border-slate-200 transition ${item.stock > 0 ? "cursor-pointer" : "opacity-75"} overflow-hidden slide-enter" onclick="openProductDetail(${item.id})">
+          <div class="w-full h-48 bg-gradient-to-br from-orange-200 via-orange-100 to-red-200 flex items-center justify-center relative overflow-hidden">
+            ${item.image ? `<img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">` : `<i data-lucide="${item.icon}" style="width: 54px; height: 54px; color: #ea580c;"></i>`}
+            ${item.badge ? `<span class="absolute top-3 right-3 bg-yellow-300 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">${item.badge}</span>` : ""}
+            <span class="absolute top-3 left-3 ${item.stock > 0 ? "bg-white/90 text-slate-700" : "bg-red-500 text-white"} text-xs font-bold px-3 py-1 rounded-full">
+              ${item.stock > 0 ? `Stok ${item.stock}` : "Habis"}
+            </span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <h3 class="font-bold text-lg text-slate-900 leading-snug">${item.name}</h3>
+              <span class="text-xs font-semibold rounded-full px-2 py-1 ${item.category === "makanan" ? "bg-orange-100 text-orange-700" : item.category === "minuman" ? "bg-sky-100 text-sky-700" : "bg-pink-100 text-pink-700"}">${item.category}</span>
+            </div>
+            <p class="text-slate-600 text-sm mb-4">${item.desc}</p>
+            <div class="flex justify-between items-center">
+              <span class="text-xl font-bold text-orange-600">${formatCurrency(item.price)}</span>
+              <button class="${item.stock > 0 ? "bg-orange-500 hover:bg-orange-600 text-white" : "bg-slate-200 text-slate-500"} p-2 rounded-xl transition" ${item.stock > 0 ? "" : "disabled"}>
+                <i data-lucide="plus" style="width: 20px; height: 20px;"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+      lucide.createIcons();
+    }
+
+    function openProductDetail(id) {
+      currentProduct = menuData.find(item => item.id === id);
+      if (!currentProduct) return;
+      if (currentProduct.stock <= 0) {
+        showNotification("Menu ini sedang habis", "error");
+        return;
+      }
+
+      document.getElementById("product-title").textContent = currentProduct.name;
+      document.getElementById("product-desc").textContent = currentProduct.desc;
+      document.getElementById("product-image").innerHTML = currentProduct.image
+        ? `<img src="${currentProduct.image}" alt="${currentProduct.name}" class="w-full h-full object-cover rounded-2xl">`
+        : `<i data-lucide="${currentProduct.icon}" style="width: 74px; height: 74px;"></i>`;
+
+      const badge = document.getElementById("product-badge");
+      if (currentProduct.badge) {
+        badge.textContent = currentProduct.badge;
+        badge.classList.remove("hidden");
+      } else {
+        badge.classList.add("hidden");
+      }
+      if (currentProduct.stock > 0) {
+        badge.textContent = currentProduct.badge ? `${currentProduct.badge} | Stok ${currentProduct.stock}` : `Stok ${currentProduct.stock}`;
+        badge.classList.remove("hidden");
+      }
+
+      document.getElementById("variant-section").innerHTML = currentProduct.variants.map((variant, idx) => `
+        <div class="mb-4">
+          <label class="block text-sm font-semibold mb-3">${variant.name}</label>
+          <select id="variant-${idx}" class="w-full border-2 border-slate-200 rounded-xl p-3 focus:outline-none focus:border-orange-500" onchange="updateProductPrice()">
+            ${variant.options.map(option => `<option value="${option.label}">${option.label}${option.price ? " (+" + formatCurrency(option.price) + ")" : ""}</option>`).join("")}
+          </select>
+        </div>
+      `).join("");
+
+      document.getElementById("qty-display").textContent = "1";
+      document.getElementById("product-notes").value = "";
+      updateProductPrice();
+      document.getElementById("product-modal").classList.remove("hidden");
+      lucide.createIcons();
+    }
+
+    function updateProductPrice() {
+      if (!currentProduct) return;
+      const selectedVariants = getSelectedVariantInfo(currentProduct);
+      const unitPrice = computeProductUnitPrice(currentProduct, selectedVariants);
+      document.getElementById("product-price").textContent = formatCurrency(unitPrice);
+    }
+
+    function addToCart() {
+      if (!currentProduct) return;
+      const quantity = parseInt(document.getElementById("qty-display").textContent, 10);
+      if (currentProduct.stock <= 0) return showNotification("Menu ini sedang habis", "error");
+      if (quantity > currentProduct.stock) return showNotification("Jumlah melebihi stok yang tersedia", "error");
+      const variants = getSelectedVariantInfo(currentProduct);
+      const unitPrice = computeProductUnitPrice(currentProduct, variants);
+      const notes = document.getElementById("product-notes").value.trim();
+
+      cart.push({
+        id: Date.now(),
+        menuId: currentProduct.id,
+        name: currentProduct.name,
+        category: currentProduct.category,
+        icon: currentProduct.icon,
+        basePrice: currentProduct.price,
+        unitPrice,
+        quantity,
+        variants,
+        notes,
+        subtotal: unitPrice * quantity
+      });
+
+      saveState();
+      updateCartCount();
+      closeProductModal();
+      showNotification("Ditambahkan ke keranjang");
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      saveState();
+      updateCartCount();
+      updateCartSummary();
+      showNotification("Dihapus dari keranjang");
+    }
+
+    function changeCartQty(id, delta) {
+      cart = cart.reduce((result, item) => {
+        if (item.id !== id) {
+          result.push(item);
+          return result;
+        }
+        const nextQty = item.quantity + delta;
+        if (nextQty > 0) {
+          result.push({ ...item, quantity: nextQty, subtotal: item.unitPrice * nextQty });
+        }
+        return result;
+      }, []);
+      saveState();
+      updateCartCount();
+      updateCartSummary();
+    }
+
+    function updateCartSummary() {
+      const subtotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
+      const estimatedDelivery = getDeliveryFee(subtotal, "delivery");
+      const total = subtotal + estimatedDelivery;
+
+      document.getElementById("subtotal").textContent = formatCurrency(subtotal);
+      document.getElementById("delivery-fee-display").textContent = estimatedDelivery === 0 && subtotal >= config.free_delivery_minimum ? "Gratis" : formatCurrency(estimatedDelivery);
+      document.getElementById("total-price").textContent = formatCurrency(total);
+
+      const container = document.getElementById("cart-items-container");
+      if (!cart.length) {
+        document.getElementById("empty-cart").classList.remove("hidden");
+        container.innerHTML = "";
+        return;
+      }
+
+      document.getElementById("empty-cart").classList.add("hidden");
+      container.innerHTML = cart.map(item => `
+        <div class="bg-white border border-slate-200 rounded-3xl p-4 md:p-5 flex gap-4 slide-enter">
+          <div class="w-20 h-20 bg-gradient-to-br from-orange-200 to-red-200 rounded-2xl flex items-center justify-center flex-shrink-0 text-orange-600">
+            <i data-lucide="${item.icon}" style="width: 34px; height: 34px;"></i>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h4 class="font-bold text-slate-900">${item.name}</h4>
+                <p class="text-sm text-slate-600 mt-1">${item.variants.map(v => v.group + ": " + v.label).join(", ")}</p>
+                ${item.notes ? `<p class="text-xs text-slate-500 mt-1">Catatan: ${item.notes}</p>` : ""}
+              </div>
+              <button class="text-red-500 hover:text-red-700" onclick="removeFromCart(${item.id})">
+                <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
+              </button>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-4">
+              <div class="flex items-center gap-3 bg-slate-100 rounded-xl p-2">
+                <button class="bg-white hover:bg-slate-50 p-2 rounded-lg transition" onclick="changeCartQty(${item.id}, -1)">
+                  <i data-lucide="minus" style="width: 18px; height: 18px;"></i>
+                </button>
+                <span class="font-bold w-6 text-center">${item.quantity}</span>
+                <button class="bg-white hover:bg-slate-50 p-2 rounded-lg transition" onclick="changeCartQty(${item.id}, 1)">
+                  <i data-lucide="plus" style="width: 18px; height: 18px;"></i>
+                </button>
+              </div>
+              <div class="text-right">
+                <p class="text-xs text-slate-500">${formatCurrency(item.unitPrice)} x ${item.quantity}</p>
+                <p class="font-bold text-orange-600">${formatCurrency(item.subtotal)}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+      lucide.createIcons();
+    }
+
+    function switchView(view) {
+      document.getElementById("homepage").classList.add("hidden");
+      document.getElementById("cart-view").classList.add("hidden");
+      document.getElementById("checkout-view").classList.add("hidden");
+      document.getElementById("confirmation-view").classList.add("hidden");
+      document.getElementById("history-view").classList.add("hidden");
+
+      if (view === "home") {
+        document.getElementById("homepage").classList.remove("hidden");
+        renderMenu(getActiveCategory(), document.getElementById("search-input").value);
+      } else if (view === "cart") {
+        document.getElementById("cart-view").classList.remove("hidden");
+        updateCartSummary();
+      } else if (view === "checkout") {
+        document.getElementById("checkout-view").classList.remove("hidden");
+        updateCheckoutSummary();
+      } else if (view === "confirmation") {
+        document.getElementById("confirmation-view").classList.remove("hidden");
+      } else if (view === "history") {
+        document.getElementById("history-view").classList.remove("hidden");
+        refreshMyOrderStatuses().finally(renderOrderHistory);
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      lucide.createIcons();
+    }
+
+    function updateCheckoutSummary() {
+      const orderType = document.querySelector('input[name="order-type"]:checked').value;
+      const subtotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
+      const deliveryFee = getDeliveryFee(subtotal, orderType);
+      const total = subtotal + deliveryFee;
+
+      document.getElementById("checkout-summary").innerHTML = cart.map(item => `
+        <div class="flex justify-between gap-4">
+          <span>${item.name} x${item.quantity}</span>
+          <span class="font-semibold">${formatCurrency(item.subtotal)}</span>
+        </div>
+      `).join("");
+
+      document.getElementById("checkout-subtotal").textContent = formatCurrency(subtotal);
+      document.getElementById("checkout-delivery").textContent = deliveryFee === 0 ? "Gratis" : formatCurrency(deliveryFee);
+      document.getElementById("checkout-total").textContent = formatCurrency(total);
+    }
+
+    function fillConfirmation(order) {
+      document.getElementById("order-number").textContent = order.order_number;
+      document.getElementById("confirm-name").textContent = order.customer_name;
+      document.getElementById("confirm-total").textContent = formatCurrency(order.total);
+      document.getElementById("confirm-status").textContent = order.status === "pending" ? "Sedang diproses" : order.status;
+
+      const paymentText = {
+        cash: "Tunai / COD",
+        transfer: "Transfer Bank",
+        ewallet: "E-Wallet / QRIS"
+      };
+
+      const paymentStatusText = {
+        unpaid: "Belum Bayar",
+        pending_verification: "Menunggu Verifikasi",
+        paid: "Lunas",
+        failed: "Gagal"
+      };
+
+      document.getElementById("confirmation-payment-info").innerHTML = `<strong>Metode Pembayaran:</strong> ${paymentText[order.payment_method] || order.payment_method}<br><strong>Status Pembayaran:</strong> ${paymentStatusText[order.payment_status] || order.payment_status || "Belum Bayar"}`;
+
+      if (order.order_type === "dine-in") {
+        document.getElementById("confirmation-subtitle").textContent = "Pesanan Anda sudah masuk ke dapur";
+        document.getElementById("confirm-location-section").innerHTML = `<p class="text-sm text-slate-600">Nomor Meja</p><p class="font-semibold">${order.customer_address}</p>`;
+        document.getElementById("confirm-estimation").textContent = "15-20 menit";
+        document.getElementById("confirmation-note-text").innerHTML = "<strong>Catatan:</strong> Pesanan Anda sedang disiapkan. Kami akan memanggil nama Anda saat pesanan siap.";
+      } else {
+        document.getElementById("confirmation-subtitle").textContent = "Pesanan Anda akan segera diantar";
+        document.getElementById("confirm-location-section").innerHTML = `<p class="text-sm text-slate-600">Alamat Pengiriman</p><p class="font-semibold">${order.customer_address}</p>`;
+        document.getElementById("confirm-estimation").textContent = "30-45 menit";
+        document.getElementById("confirmation-note-text").innerHTML = "<strong>Catatan:</strong> Pesanan Anda sedang disiapkan dan akan segera diantar. Tim kami dapat menghubungi Anda untuk konfirmasi.";
+      }
+    }
+
+    async function placeOrder(event) {
+      event.preventDefault();
+      if (!cart.length) {
+        showNotification("Keranjang masih kosong", "error");
+        return;
+      }
+
+      const orderType = document.querySelector('input[name="order-type"]:checked').value;
+      const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+      const customerName = document.getElementById("customer-name").value.trim();
+      const tableNumber = document.getElementById("customer-table").value.trim();
+      const customerAddress = document.getElementById("customer-address").value.trim();
+      const customerPhone = document.getElementById("customer-phone-delivery").value.trim();
+      const specialNotes = document.getElementById("special-notes").value.trim();
+
+      if (!customerName) return showNotification("Nama pelanggan harus diisi", "error");
+      if (orderType === "dine-in" && !tableNumber) return showNotification("Nomor meja harus diisi", "error");
+      if (orderType === "delivery" && !customerAddress) return showNotification("Alamat pengiriman harus diisi", "error");
+      if (orderType === "delivery" && !customerPhone) return showNotification("Nomor HP harus diisi", "error");
+
+      const subtotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
+      const deliveryFee = getDeliveryFee(subtotal, orderType);
+      const total = subtotal + deliveryFee;
+
+      const orderData = {
+        order_number: "ORD-" + Date.now().toString().slice(-8),
+        customer_name: customerName,
+        customer_phone: orderType === "delivery" ? customerPhone : tableNumber,
+        customer_address: orderType === "delivery" ? customerAddress : "Meja " + tableNumber,
+        special_notes: specialNotes,
+        items: cart.slice(),
+        subtotal,
+        delivery_fee: deliveryFee,
+        total,
+        payment_method: paymentMethod,
+        payment_status: paymentMethod === "cash" ? "unpaid" : "pending_verification",
+        order_type: orderType,
+        status: "pending",
+        created_at: new Date().toISOString()
+      };
+
+      try {
+        const response = await apiFetch("/api/orders", {
+          method: "POST",
+          body: JSON.stringify(orderData)
+        });
+        allOrders.unshift(response.order);
+        menuData = normalizeMenuData(response.menu);
+        cart = [];
+        saveState();
+        updateCartCount();
+        fillConfirmation(response.order);
+        document.getElementById("checkout-form").reset();
+        document.querySelector('input[name="order-type"][value="dine-in"]').checked = true;
+        toggleOrderTypeFields();
+        switchView("confirmation");
+        showNotification("Pesanan berhasil dibuat");
+      } catch (error) {
+        await loadBootstrap();
+        renderMenu(getActiveCategory(), document.getElementById("search-input").value);
+        updateCheckoutSummary();
+        showNotification(error.message, "error");
+      }
+    }
+
+    function renderOrderHistory() {
+      const container = document.getElementById("history-container");
+      const emptyState = document.getElementById("empty-history");
+
+      if (!allOrders.length) {
+        container.innerHTML = "";
+        emptyState.classList.remove("hidden");
+        return;
+      }
+
+      emptyState.classList.add("hidden");
+      container.innerHTML = allOrders.map(order => {
+        const statusColors = {
+          pending: "bg-yellow-100 text-yellow-800",
+          preparing: "bg-blue-100 text-blue-800",
+          shipped: "bg-purple-100 text-purple-800",
+          delivered: "bg-green-100 text-green-800",
+          cancelled: "bg-red-100 text-red-800"
+        };
+        const statusText = {
+          pending: "Menunggu",
+          preparing: "Dipersiapkan",
+          shipped: "Dalam Perjalanan",
+          delivered: "Terkirim",
+          cancelled: "Dibatalkan"
+        };
+        const paymentStatusText = {
+          unpaid: "Belum Bayar",
+          pending_verification: "Menunggu Verifikasi",
+          paid: "Lunas",
+          failed: "Gagal"
+        };
+        const orderDate = new Date(order.created_at).toLocaleDateString("id-ID", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+        return `
+          <div class="bg-white border border-slate-200 rounded-3xl p-5 slide-enter hover:shadow-md transition">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+              <div><p class="text-sm text-slate-500">Nomor Pesanan</p><p class="font-bold text-lg">${order.order_number}</p></div>
+              <div><p class="text-sm text-slate-500">Tanggal</p><p class="font-semibold">${orderDate}</p></div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-4 py-2 rounded-full text-sm font-semibold ${statusColors[order.status] || "bg-slate-100 text-slate-800"}">${statusText[order.status] || order.status}</span>
+                <span class="px-4 py-2 rounded-full text-sm font-semibold ${order.payment_status === "paid" ? "bg-green-100 text-green-800" : order.payment_status === "pending_verification" ? "bg-blue-100 text-blue-800" : order.payment_status === "failed" ? "bg-red-100 text-red-800" : "bg-yellow-100 text-yellow-800"}">${paymentStatusText[order.payment_status] || "Belum Bayar"}</span>
+              </div>
+            </div>
+            <div class="border-t border-slate-200 pt-4">
+              <p class="text-sm font-semibold mb-2">Item:</p>
+              <div class="space-y-2 mb-4">${order.items.map(item => `<p class="text-sm text-slate-600">${item.name} x${item.quantity} - ${formatCurrency(item.subtotal)}</p>`).join("")}</div>
+              <div class="flex justify-between items-center pt-4 border-t border-slate-200">
+                <span class="font-semibold">Total</span>
+                <span class="text-lg font-bold text-orange-600">${formatCurrency(order.total)}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+      lucide.createIcons();
+    }
+
+    function toggleOrderTypeFields() {
+      const orderType = document.querySelector('input[name="order-type"]:checked').value;
+      document.getElementById("dine-in-field").classList.toggle("hidden", orderType !== "dine-in");
+      document.getElementById("delivery-field").classList.toggle("hidden", orderType !== "delivery");
+      document.getElementById("phone-field").classList.toggle("hidden", orderType !== "delivery");
+      updateCheckoutSummary();
+    }
+
+    document.getElementById("cart-btn").addEventListener("click", () => switchView("cart"));
+    document.getElementById("history-btn").addEventListener("click", () => switchView("history"));
+    document.getElementById("order-now-btn").addEventListener("click", () => {
+      document.getElementById("menu-grid").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    document.getElementById("close-modal").addEventListener("click", closeProductModal);
+    document.getElementById("add-to-cart-btn").addEventListener("click", addToCart);
+    document.getElementById("qty-plus").addEventListener("click", () => {
+      const display = document.getElementById("qty-display");
+      const nextQty = parseInt(display.textContent, 10) + 1;
+      if (currentProduct && nextQty > currentProduct.stock) {
+        return showNotification("Stok tidak mencukupi", "error");
+      }
+      display.textContent = String(nextQty);
+    });
+    document.getElementById("qty-minus").addEventListener("click", () => {
+      const display = document.getElementById("qty-display");
+      const current = parseInt(display.textContent, 10);
+      if (current > 1) display.textContent = String(current - 1);
+    });
+    document.getElementById("checkout-btn").addEventListener("click", () => {
+      if (!cart.length) return showNotification("Keranjang masih kosong", "error");
+      switchView("checkout");
+    });
+    document.getElementById("back-from-cart").addEventListener("click", () => switchView("home"));
+    document.getElementById("back-from-history").addEventListener("click", () => switchView("home"));
+    document.getElementById("back-to-cart-btn").addEventListener("click", () => switchView("cart"));
+    document.getElementById("back-checkout").addEventListener("click", () => switchView("cart"));
+    document.getElementById("checkout-form").addEventListener("submit", placeOrder);
+    document.getElementById("order-again-btn").addEventListener("click", () => switchView("home"));
+
+    document.querySelectorAll('input[name="order-type"]').forEach(radio => {
+      radio.addEventListener("change", toggleOrderTypeFields);
+    });
+
+    document.querySelectorAll(".category-btn").forEach(btn => {
+      btn.addEventListener("click", event => {
+        document.querySelectorAll(".category-btn").forEach(node => {
+          node.classList.remove("bg-orange-500", "text-white", "border-orange-500");
+          node.classList.add("bg-white", "text-slate-700", "border", "border-slate-200");
+        });
+        event.currentTarget.classList.remove("bg-white", "text-slate-700", "border", "border-slate-200");
+        event.currentTarget.classList.add("bg-orange-500", "text-white", "border-orange-500");
+        renderMenu(event.currentTarget.dataset.category, document.getElementById("search-input").value);
+      });
+    });
+
+    document.getElementById("search-input").addEventListener("input", event => {
+      renderMenu(getActiveCategory(), event.target.value);
+    });
+
+    document.getElementById("product-modal").addEventListener("click", event => {
+      if (event.target.id === "product-modal") closeProductModal();
+    });
+
+    async function initializePage() {
+      try {
+        await loadBootstrap();
+      } catch (error) {
+        if (!hydrateFromSharedBootstrap()) {
+          menuData = normalizeMenuData(defaultMenuData);
+          config = { ...defaultConfig };
+        }
+        showNotification("Backend belum terhubung. Menampilkan data default.", "error");
+      }
+
+      lastMenuSignature = getMenuSignature(menuData);
+      lastConfigSignature = getConfigSignature(config);
+      setRestaurantInfo();
+      updateCartCount();
+      renderMenu();
+      toggleOrderTypeFields();
+      startCustomerRealtimeSync();
+      lucide.createIcons();
+    }
+
+    initializePage();
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        syncCustomerData({ silent: true }).catch(() => {});
+      }
+    });
+
+    window.addEventListener("storage", event => {
+      if (!event.key || ![storageKeys.sharedBootstrap, storageKeys.sharedSyncEvent].includes(event.key)) return;
+      if (hydrateFromSharedBootstrap()) {
+        const nextMenuSignature = getMenuSignature(menuData);
+        const nextConfigSignature = getConfigSignature(config);
+        const hasMenuChanges = nextMenuSignature !== lastMenuSignature;
+        const hasConfigChanges = nextConfigSignature !== lastConfigSignature;
+        if (!hasMenuChanges && !hasConfigChanges) return;
+        lastMenuSignature = nextMenuSignature;
+        lastConfigSignature = nextConfigSignature;
+        setRestaurantInfo();
+        if (hasMenuChanges) {
+          renderMenu(getActiveCategory(), document.getElementById("search-input").value);
+          if (currentProduct) {
+            const refreshed = menuData.find(item => item.id === currentProduct.id);
+            if (refreshed) currentProduct = refreshed;
+          }
+        }
+        if (hasConfigChanges && !document.getElementById("cart-view").classList.contains("hidden")) {
+          updateCartSummary();
+        }
+        lucide.createIcons();
+      }
+    });
+
+    window.openProductDetail = openProductDetail;
+    window.removeFromCart = removeFromCart;
+    window.changeCartQty = changeCartQty;
+    window.updateProductPrice = updateProductPrice;
+  </script>
+</body>
+</html>
